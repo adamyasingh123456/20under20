@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta name="theme-color" content="#152449">
+<title>Submit Nomination | Sunstone 20 Under 20 Rajasthan 2026</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<script>
+tailwind.config = {
+  theme: { extend: { colors: { brand: {
+    navy: '#152449', deepNavy: '#0d1833', gold: '#c88c32', lightGold: '#e8af5c', softGold: '#fbf5ea'
+  } } } }
+}
+</script>
+<style>
+  body, h1, h2, h3, h4, p, span, a, button, input, select, textarea, label, div { font-family: 'Public Sans', system-ui, sans-serif; }
+  body { color:#1e293b; background:#f8fafc; -webkit-text-size-adjust:100%; }
+  /* 16px inputs stop iOS Safari zooming in on focus; 48px height = easy tap target */
+  .field { width:100%; border:1px solid #cbd5e1; border-radius:.75rem; padding:.75rem .9rem; font-size:16px; min-height:48px; background:#fff; }
+  textarea.field { min-height:auto; }
+  .field:focus { outline:none; border-color:#c88c32; box-shadow:0 0 0 3px rgba(200,140,50,.18); }
+  .lbl { display:block; font-size:.82rem; font-weight:700; color:#152449; margin-bottom:.35rem; }
+  .hint { font-size:.75rem; color:#64748b; margin-top:.3rem; line-height:1.4; }
+  .req::after { content:" *"; color:#c88c32; }
+  .err { border-color:#dc2626 !important; background:#fef2f2; }
+  .ferr { font-size:.75rem; color:#dc2626; font-weight:600; margin-top:.3rem; }
+  .opt { cursor:pointer; display:block; }
+  .opt input:checked + div { border-color:#c88c32; background:#fbf5ea; box-shadow:0 0 0 1px #c88c32 inset; }
+  .opt input:focus-visible + div { outline:2px solid #c88c32; outline-offset:2px; }
+  .phone { display:flex; }
+  .phone .pre { display:flex; align-items:center; padding:0 .8rem; background:#f1f5f9; border:1px solid #cbd5e1; border-right:0; border-radius:.75rem 0 0 .75rem; font-size:16px; font-weight:600; color:#475569; }
+  .phone .field { border-radius:0 .75rem .75rem 0; }
+  select.field { appearance:auto; }
+  input[type=checkbox] { width:1.25rem; height:1.25rem; flex-shrink:0; }
+  @media (hover:hover){ .opt:hover > div { border-color:#c88c32; } #submitBtn:not(:disabled):hover { background-color:#c88c32; transform:translateY(-2px); box-shadow:0 10px 20px -8px rgba(21,36,73,.45); } #submitBtn { transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease; } }
+  @media (max-width:640px){ .card { padding:1.25rem !important; border-radius:1.25rem !important; } }
+</style>
+</head>
+<body class="antialiased selection:bg-brand-gold selection:text-white pb-6">
+
+<header class="w-full text-xs" style="background:#0d162b;color:#e2e8f0">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-2 flex flex-wrap items-center justify-between gap-x-4 gap-y-0.5">
+    <span><strong style="color:#fff">Nominations open</strong> 22 Oct 2026</span>
+    <span style="color:#cbd5e1">Close <strong style="color:#fff">21 Nov 2026</strong> · No fee</span>
+  </div>
+</header>
+
+<nav class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 sm:h-[4.5rem] flex items-center justify-between">
+    <a href="index.html" aria-label="Sunstone 20 Under 20 home"><img src="logo.png" alt="Sunstone 20 Under 20 Rajasthan Edition 2026" class="h-10 sm:h-12 w-auto"></a>
+    <a href="index.html" class="text-xs font-semibold text-slate-600 hover:text-brand-gold py-2">&larr; Home</a>
+  </div>
+  <div class="h-1 bg-slate-100"><div id="progress" class="h-1 bg-brand-gold transition-all duration-300" style="width:0%"></div></div>
+</nav>
+
+<main class="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
+  <div id="form-top" class="mb-6 sm:mb-8" style="scroll-margin-top:5rem">
+    <span class="block text-[11px] font-bold uppercase tracking-widest text-brand-gold border-l-2 border-brand-gold pl-2 mb-3">Rajasthan Edition 2026</span>
+    <h1 class="text-2xl sm:text-4xl font-extrabold text-brand-navy tracking-tight">Submit a Nomination</h1>
+    <p class="mt-2 sm:mt-3 text-slate-600 text-sm sm:text-base">Nominate yourself or someone whose work deserves recognition. Nominees must be <strong>under 20 on 21 November 2026</strong> and have a connection to Rajasthan. It takes about 10 minutes. Fields marked <span class="text-brand-gold font-bold">*</span> are required.</p>
+  </div>
+
+  <form id="nomForm" novalidate class="space-y-5 sm:space-y-6">
+    <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true">
+
+    <!-- 1. Type -->
+    <section class="card bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8">
+      <h2 class="font-bold text-lg text-brand-navy mb-1">1. Who is submitting?</h2>
+      <p class="hint mb-4">Self-nominations and third-party nominations are both welcome.</p>
+      <div class="grid sm:grid-cols-2 gap-3">
+        <label class="opt"><input type="radio" name="nomination_type" value="Self" class="sr-only" checked>
+          <div class="border-2 border-slate-200 rounded-2xl p-4 transition"><div class="font-bold text-sm text-brand-navy">I'm nominating myself</div><div class="hint">You know your work best.</div></div></label>
+        <label class="opt"><input type="radio" name="nomination_type" value="Someone else" class="sr-only">
+          <div class="border-2 border-slate-200 rounded-2xl p-4 transition"><div class="font-bold text-sm text-brand-navy">I'm nominating someone else</div><div class="hint">Mentor, teacher, parent, peer, etc.</div></div></label>
+      </div>
+    </section>
+
+    <!-- Nominator -->
+    <section id="nominatorBox" class="hidden card bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8">
+      <h2 class="font-bold text-lg text-brand-navy mb-4">Your details (nominator)</h2>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div><label class="lbl req">Your full name</label><input class="field" name="nominator_name" data-3p autocomplete="name" placeholder="e.g. Rakesh Sharma"></div>
+        <div><label class="lbl req">Relationship to nominee</label>
+          <select class="field" name="nominator_relationship" data-3p data-other="nominator_relationship_other">
+            <option value="">Select relationship…</option><option>Parent / Guardian</option><option>Teacher / Faculty</option><option>School / College Principal</option><option>Mentor / Coach</option><option>Friend / Peer</option><option>Co-founder / Collaborator</option><option>Employer / Organisation head</option><option>Community / NGO leader</option><option>Other</option>
+          </select></div>
+        <div class="sm:col-span-2 hidden" id="wrap_nominator_relationship_other"><label class="lbl req">Please specify relationship</label><input class="field" name="nominator_relationship_other" placeholder="e.g. Neighbour, Club president"></div>
+        <div><label class="lbl req">Your email</label><input type="email" class="field" name="nominator_email" data-3p inputmode="email" autocomplete="email" autocapitalize="none" placeholder="name@example.com"></div>
+        <div><label class="lbl req">Your mobile number</label>
+          <div class="phone"><span class="pre">+91</span><input type="tel" class="field" name="nominator_phone" data-3p data-phone inputmode="numeric" maxlength="10" autocomplete="tel-national" placeholder="10-digit mobile number"></div>
+          <p class="hint">Enter 10 digits, without +91 or 0.</p></div>
+      </div>
+    </section>
+
+    <!-- Nominee -->
+    <section class="card bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8">
+      <h2 class="font-bold text-lg text-brand-navy mb-4"><span id="nomineeTitle">2. Your details</span></h2>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="sm:col-span-2"><label class="lbl req">Full name</label><input class="field" name="nominee_name" required autocomplete="name" placeholder="As on school / college ID"></div>
+        <div><label class="lbl req">Date of birth</label><input type="date" class="field" name="nominee_dob" id="dob" required autocomplete="bday">
+          <p class="hint">Must be born after 21 Nov 2006.</p><p id="dobMsg" class="hint font-semibold"></p></div>
+        <div><label class="lbl req">Gender</label>
+          <select class="field" name="nominee_gender" required><option value="">Select…</option><option>Female</option><option>Male</option><option>Non-binary</option><option>Prefer not to say</option></select></div>
+        <div><label class="lbl req">Email</label><input type="email" class="field" name="nominee_email" required inputmode="email" autocomplete="email" autocapitalize="none" placeholder="name@example.com">
+          <p class="hint">We'll send updates here. Use an email you check regularly.</p></div>
+        <div><label class="lbl req">Mobile / WhatsApp number</label>
+          <div class="phone"><span class="pre">+91</span><input type="tel" class="field" name="nominee_phone" required data-phone inputmode="numeric" maxlength="10" autocomplete="tel-national" placeholder="10-digit mobile number"></div>
+          <p class="hint">Enter 10 digits, without +91 or 0. Preferably on WhatsApp.</p></div>
+        <div><label class="lbl req">District</label>
+          <select class="field" name="nominee_district" required data-other="nominee_district_other">
+            <option value="">Select district…</option>
+            <option>Ajmer</option><option>Alwar</option><option>Banswara</option><option>Baran</option><option>Barmer</option><option>Bharatpur</option><option>Bhilwara</option><option>Bikaner</option><option>Bundi</option><option>Chittorgarh</option><option>Churu</option><option>Dausa</option><option>Dholpur</option><option>Dungarpur</option><option>Hanumangarh</option><option>Jaipur</option><option>Jaisalmer</option><option>Jalore</option><option>Jhalawar</option><option>Jhunjhunu</option><option>Jodhpur</option><option>Karauli</option><option>Kota</option><option>Nagaur</option><option>Pali</option><option>Pratapgarh</option><option>Rajsamand</option><option>Sawai Madhopur</option><option>Sikar</option><option>Sirohi</option><option>Sri Ganganagar</option><option>Tonk</option><option>Udaipur</option>
+            <option>Other (newer district / outside Rajasthan)</option>
+          </select></div>
+        <div id="wrap_nominee_district_other" class="hidden"><label class="lbl req">Your district / state</label><input class="field" name="nominee_district_other" placeholder="e.g. Beawar, or Pune, Maharashtra"></div>
+        <div><label class="lbl req">City / Town / Village</label><input class="field" name="nominee_city" required autocomplete="address-level2" placeholder="e.g. Malviya Nagar, Jaipur"></div>
+        <div><label class="lbl req">Current stage</label>
+          <select class="field" name="nominee_stage" required>
+            <option value="">Select…</option><option>School: Class 8–10</option><option>School: Class 11–12</option><option>Undergraduate (1st–3rd year)</option><option>Diploma / ITI / Polytechnic</option><option>Dropout / Gap year</option><option>Working / Full-time founder</option><option>Other</option>
+          </select></div>
+        <div class="sm:col-span-2"><label class="lbl req">School / College / Organisation</label><input class="field" name="nominee_institution" required autocomplete="organization" placeholder="Full name of institution or venture"></div>
+        <div class="sm:col-span-2"><label class="lbl req">Connection to Rajasthan</label>
+          <select class="field" name="rajasthan_connection" required>
+            <option value="">Select…</option><option>Currently reside in Rajasthan</option><option>Studied / studying in Rajasthan</option><option>Family roots in Rajasthan</option><option>Built work with direct value in Rajasthan</option>
+          </select></div>
+        <div class="sm:col-span-2"><label class="lbl">Instagram / LinkedIn / website</label><input type="url" class="field" name="nominee_social" inputmode="url" autocapitalize="none" placeholder="https://instagram.com/yourhandle">
+          <p class="hint">Optional. Paste the full link, starting with https://</p></div>
+      </div>
+    </section>
+
+    <!-- Guardian -->
+    <section id="guardianBox" class="hidden card bg-amber-50 rounded-3xl border border-brand-gold/40 shadow-sm p-6 sm:p-8">
+      <h2 class="font-bold text-lg text-brand-navy mb-1">Parent / Guardian consent</h2>
+      <p class="hint mb-4">Required because the nominee is under 18.</p>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div><label class="lbl req">Guardian full name</label><input class="field" name="guardian_name" data-minor placeholder="e.g. Sunita Sharma"></div>
+        <div><label class="lbl req">Relationship</label>
+          <select class="field" name="guardian_relationship" data-minor><option value="">Select…</option><option>Mother</option><option>Father</option><option>Legal guardian</option><option>Other family member</option></select></div>
+        <div><label class="lbl req">Guardian email</label><input type="email" class="field" name="guardian_email" data-minor inputmode="email" autocapitalize="none" placeholder="name@example.com"></div>
+        <div><label class="lbl req">Guardian mobile number</label>
+          <div class="phone"><span class="pre">+91</span><input type="tel" class="field" name="guardian_phone" data-minor data-phone inputmode="numeric" maxlength="10" placeholder="10-digit mobile number"></div>
+          <p class="hint">Enter 10 digits, without +91 or 0.</p></div>
+      </div>
+      <label class="flex gap-3 mt-5 text-sm text-slate-700 items-start"><input type="checkbox" name="guardian_consent" value="Yes" data-minor class="mt-0.5 rounded text-brand-gold">
+        <span id="guardianConsentText">I am the parent / legal guardian and consent to my ward's personal information being processed for this nomination. I understand separate permissions may be needed for event participation, photography, video and public publication. <span class="text-brand-gold font-bold">*</span></span></label>
+    </section>
+
+    <!-- Category -->
+    <section class="card bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8">
+      <h2 class="font-bold text-lg text-brand-navy mb-1">3. Category <span class="text-brand-gold">*</span></h2>
+      <p class="hint mb-4">Pick the one that best fits the work. Not sure? Choose the closest; the jury can reassign.</p>
+      <div id="catGroup" class="grid sm:grid-cols-2 gap-3">
+        <label class="opt"><input type="radio" name="category" value="Entrepreneurship" class="sr-only"><div class="border-2 border-slate-200 rounded-2xl p-4"><div class="font-bold text-sm text-brand-navy">Entrepreneurship</div><div class="hint">Startups, businesses, products, market innovation.</div></div></label>
+        <label class="opt"><input type="radio" name="category" value="Technology & AI" class="sr-only"><div class="border-2 border-slate-200 rounded-2xl p-4"><div class="font-bold text-sm text-brand-navy">Technology &amp; AI</div><div class="hint">AI, apps, software, robotics, tech research.</div></div></label>
+        <label class="opt"><input type="radio" name="category" value="Creativity" class="sr-only"><div class="border-2 border-slate-200 rounded-2xl p-4"><div class="font-bold text-sm text-brand-navy">Creativity</div><div class="hint">Art, design, film, music, writing, digital content.</div></div></label>
+        <label class="opt"><input type="radio" name="category" value="Emerging Talent" class="sr-only"><div class="border-2 border-slate-200 rounded-2xl p-4"><div class="font-bold text-sm text-brand-navy">Emerging Talent</div><div class="hint">Sports, academics, research, standout feats.</div></div></label>
+        <label class="opt sm:col-span-2"><input type="radio" name="category" value="Social Impact" class="sr-only"><div class="border-2 border-slate-200 rounded-2xl p-4"><div class="font-bold text-sm text-brand-navy">Social Impact</div><div class="hint">Community, environment, grassroots welfare, systemic change.</div></div></label>
+      </div>
+      <p id="catErr" class="hidden ferr">Please choose a category.</p>
+    </section>
+
+    <!-- Work -->
+    <section class="card bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8">
+      <h2 class="font-bold text-lg text-brand-navy mb-4">4. The work</h2>
+      <div class="space-y-5">
+        <div><label class="lbl req">Title of project / achievement</label><input class="field" name="achievement_title" required maxlength="120" placeholder="e.g. AI crop-disease detector for farmers">
+          <p class="hint">A short headline, up to 120 characters.</p></div>
+        <div><label class="lbl req">When did the work start?</label>
+          <select class="field" name="work_duration" required><option value="">Select…</option><option>Less than 6 months ago</option><option>6–12 months ago</option><option>1–2 years ago</option><option>2–3 years ago</option><option>More than 3 years ago</option></select></div>
+        <div><label class="lbl req">What have they actually done?</label><textarea class="field" rows="5" name="achievement_summary" required maxlength="1200" data-count="1200" placeholder="Describe what was built or achieved: key milestones, your role, and results so far."></textarea>
+          <p class="hint"><span class="cnt">0</span>/1200 · Be specific: concrete output matters more than ambition.</p></div>
+        <div><label class="lbl req">What difference did it make?</label><textarea class="field" rows="4" name="impact" required maxlength="800" data-count="800" placeholder="e.g. 300 farmers used it; raised ₹50,000 for 40 students; 10,000 followers"></textarea>
+          <p class="hint"><span class="cnt">0</span>/800 · Include numbers: people reached, revenue, users, awards.</p></div>
+        <div><label class="lbl req">What makes it original, and what's next?</label><textarea class="field" rows="4" name="originality_future" required maxlength="800" data-count="800" placeholder="What is different about the approach? Where could this go in the next 2–3 years?"></textarea>
+          <p class="hint"><span class="cnt">0</span>/800</p></div>
+        <div><label class="lbl req">Evidence links</label><textarea class="field" rows="3" name="evidence_links" required inputmode="url" autocapitalize="none" placeholder="https://github.com/…&#10;https://yourproject.com&#10;https://drive.google.com/…"></textarea>
+          <p class="hint">One link per line: GitHub, website, portfolio, news features, certificates, pitch deck. For Google Drive links, set sharing to <strong>"Anyone with the link can view"</strong>.</p></div>
+        <div><label class="lbl">Awards or recognition received</label><textarea class="field" rows="2" name="awards" placeholder="e.g. State-level Science Olympiad, 1st place (2025)"></textarea><p class="hint">Optional.</p></div>
+      </div>
+    </section>
+
+    <!-- Declaration -->
+    <section class="card bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-4">
+      <h2 class="font-bold text-lg text-brand-navy">5. Declaration</h2>
+      <label class="flex gap-3 text-sm text-slate-700 items-start"><input type="checkbox" name="declaration_accurate" value="Yes" required class="mt-0.5 rounded text-brand-gold"><span>I confirm that the information provided is accurate and that the nominee will be under 20 years of age on 21 November 2026. <span class="text-brand-gold font-bold">*</span></span></label>
+      <label class="flex gap-3 text-sm text-slate-700 items-start"><input type="checkbox" name="declaration_privacy" value="Yes" required class="mt-0.5 rounded text-brand-gold"><span>I agree that this data may be used by the Sunstone 20 Under 20 team and jury solely for evaluation and programme communication. <span class="text-brand-gold font-bold">*</span></span></label>
+      <label id="awareBox" class="hidden flex gap-3 text-sm text-slate-700 items-start"><input type="checkbox" name="declaration_nominee_aware" value="Yes" class="mt-0.5 rounded text-brand-gold"><span>The nominee knows about, or will be informed of, this nomination.</span></label>
+      <label id="parentConsentBox" class="hidden flex gap-3 text-sm text-slate-700 items-start"><input type="checkbox" name="declaration_parent_consent" value="Yes" class="mt-0.5 rounded text-brand-gold"><span>I have taken the consent of the nominee's parent or legal guardian, as the nominee is under 18 years of age. <span class="text-brand-gold font-bold">*</span></span></label>
+      <div class="pt-2">
+        <label class="lbl">How did you hear about us?</label>
+        <select class="field" name="source" data-other="source_other">
+          <option value="">Select…</option><option>Instagram</option><option>LinkedIn</option><option>WhatsApp</option><option>School / College</option><option>Friend / Family</option><option>Sunstone team</option><option>News / Media</option><option>Other</option>
+        </select>
+      </div>
+      <div id="wrap_source_other" class="hidden"><label class="lbl">Please specify</label><input class="field" name="source_other"></div>
+    </section>
+
+    <div id="formMsg" class="hidden rounded-xl px-4 py-3 text-sm font-semibold"></div>
+
+    <button id="submitBtn" type="submit" class="w-full bg-brand-navy hover:bg-[#1a2f60] active:scale-[.99] text-white font-bold text-base px-8 py-4 rounded-full shadow-lg transition disabled:opacity-60 disabled:cursor-not-allowed">Submit Nomination</button>
+    <p class="text-center text-xs text-slate-500">No application fee · Nominations close 21 November 2026</p>
+  </form>
+
+  <!-- success -->
+  <div id="success" class="hidden bg-white rounded-3xl border border-emerald-200 shadow-lg p-8 sm:p-10 text-center">
+    <div class="w-14 h-14 mx-auto rounded-full bg-emerald-500 text-white flex items-center justify-center text-2xl mb-4">✓</div>
+    <h2 class="text-2xl font-extrabold text-brand-navy">Nomination received!</h2>
+    <p class="mt-2 text-slate-600 text-sm">Thank you. Our team will verify eligibility and the jury will review nominations from 22–30 November 2026. Shortlisted nominees will be contacted directly.</p>
+    <p class="mt-2 text-xs text-slate-500">Reference ID: <span id="refId" class="font-mono font-bold text-brand-navy"></span><br>Please note this down for any queries.</p>
+    <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+      <button onclick="location.reload()" class="px-6 py-3.5 rounded-full bg-brand-navy text-white font-bold text-sm">Submit another nomination</button>
+      <a href="index.html" class="px-6 py-3.5 rounded-full border border-slate-300 text-slate-700 font-bold text-sm">Back to main page</a>
+    </div>
+  </div>
+</main>
+
+<footer class="bg-brand-deepNavy text-slate-400 text-xs py-8 px-4 text-center">Sunstone 20 Under 20 – Rajasthan Edition 2026 · A platform for exceptional work. A community with infinite potential.</footer>
+
+<script>
+// ====== CONFIG: Apps Script Web App URL ======
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyU1Eag-meMNmZ1IDI2C56lnGGU5pO-Y_lw2Ca_z-9Pj2SWaZjLIVXdZ7I0u71YKTt6jQ/exec';
+// =============================================
+const CUTOFF = new Date('2026-11-21');
+const MIN_DOB = new Date('2006-11-21');   // must be born after this
+const MINOR_DOB = new Date('2008-11-21'); // born after this => under 18
+
+const form = document.getElementById('nomForm');
+const $ = s => document.querySelector(s);
+const isThirdParty = () => form.nomination_type.value === 'Someone else';
+const isVisible = el => !el.closest('.hidden');
+
+function ageState() {
+  const v = $('#dob').value;
+  if (!v) return null;
+  const d = new Date(v);
+  if (d <= MIN_DOB) return 'over';
+  if (d > CUTOFF) return 'future';
+  return d > MINOR_DOB ? 'minor' : 'ok';
+}
+
+function refresh() {
+  const tp = isThirdParty();
+  $('#nominatorBox').classList.toggle('hidden', !tp);
+  $('#awareBox').classList.toggle('hidden', !tp);
+  $('#nomineeTitle').textContent = tp ? '3. Nominee details' : '2. Your details';
+  const st = ageState();
+  $('#guardianBox').classList.toggle('hidden', st !== 'minor');
+  $('#parentConsentBox').classList.toggle('hidden', !(tp && st === 'minor'));
+  $('#guardianConsentText').firstChild.textContent = tp
+    ? "The parent / legal guardian consents to the nominee's personal information being processed for this nomination."
+    : "I am the parent / legal guardian and consent to my ward's personal information being processed for this nomination.";
+  const m = $('#dobMsg');
+  m.className = 'hint font-semibold';
+  if (st === 'over') { m.textContent = 'Not eligible: must be under 20 on 21 Nov 2026.'; m.classList.add('text-red-600'); }
+  else if (st === 'future') { m.textContent = 'Please enter a valid date of birth.'; m.classList.add('text-red-600'); }
+  else if (st === 'minor') { m.textContent = 'Under 18: guardian consent needed below.'; m.classList.add('text-brand-gold'); }
+  else if (st === 'ok') { m.textContent = 'Eligible ✓'; m.classList.add('text-emerald-600'); }
+  else m.textContent = '';
+  // "Other" dropdown options reveal a text box
+  form.querySelectorAll('select[data-other]').forEach(sel => {
+    const wrap = $('#wrap_' + sel.dataset.other);
+    const other = /^Other/.test(sel.value);
+    wrap.classList.toggle('hidden', !other);
+  });
+  updateProgress();
+}
+form.addEventListener('change', refresh);
+$('#dob').addEventListener('input', refresh);
+$('#dob').max = '2026-11-21';
+$('#dob').min = '2006-11-22';
+
+// phone: digits only, max 10
+form.querySelectorAll('[data-phone]').forEach(el =>
+  el.addEventListener('input', () => { el.value = el.value.replace(/\D/g, '').slice(0, 10); }));
+
+// character counters
+document.querySelectorAll('[data-count]').forEach(t =>
+  t.addEventListener('input', () => t.parentElement.querySelector('.cnt').textContent = t.value.length));
+
+// clear a field's error as soon as the user edits it
+form.addEventListener('input', e => clearErr(e.target));
+
+function clearErr(el) {
+  if (!el || !el.classList) return;
+  el.classList.remove('err');
+  const p = el.closest('div');
+  const msg = p && p.querySelector(':scope > .ferr, :scope > .phone ~ .ferr');
+  if (msg) msg.remove();
+}
+function setErr(el, text) {
+  el.classList.add('err');
+  const box = el.closest('.phone') || el;
+  if (box.parentElement.querySelector(':scope > .ferr')) return;
+  const p = document.createElement('p');
+  p.className = 'ferr'; p.textContent = text;
+  box.insertAdjacentElement('afterend', p);
+}
+
+// progress bar: share of visible required fields completed
+function updateProgress() {
+  const fields = [...form.querySelectorAll('[required]')].filter(isVisible);
+  if (isThirdParty()) form.querySelectorAll('[data-3p]').forEach(f => fields.push(f));
+  if (ageState() === 'minor') form.querySelectorAll('[data-minor]').forEach(f => fields.push(f));
+  if (isThirdParty() && ageState() === 'minor') fields.push(form.declaration_parent_consent);
+  let done = fields.filter(f => f.type === 'checkbox' ? f.checked : f.value.trim()).length;
+  let total = fields.length + 1;                       // +1 for category
+  if (form.category.value) done++;
+  $('#progress').style.width = Math.round(done / total * 100) + '%';
+}
+form.addEventListener('input', updateProgress);
+
+function showMsg(text, ok) {
+  const el = $('#formMsg');
+  el.textContent = text;
+  el.className = 'rounded-xl px-4 py-3 text-sm font-semibold ' + (ok ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-red-50 text-red-700 border border-red-200');
+}
+
+function validate() {
+  let first = null;
+  form.querySelectorAll('.err').forEach(e => e.classList.remove('err'));
+  form.querySelectorAll('.ferr').forEach(e => { if (e.id !== 'catErr') e.remove(); });
+  const bad = (el, msg) => { setErr(el, msg); first = first || el; };
+  const tp = isThirdParty(), minor = ageState() === 'minor';
+
+  const need = el => el.type === 'checkbox' ? !el.checked : !el.value.trim();
+  const msgFor = el => el.type === 'checkbox' ? 'Please tick this box to continue.' : (el.tagName === 'SELECT' ? 'Please choose an option.' : 'This field is required.');
+
+  form.querySelectorAll('[required]').forEach(el => { if (isVisible(el) && need(el)) bad(el, msgFor(el)); });
+  if (tp) form.querySelectorAll('[data-3p]').forEach(el => { if (need(el)) bad(el, msgFor(el)); });
+  if (minor) form.querySelectorAll('[data-minor]').forEach(el => { if (need(el)) bad(el, msgFor(el)); });
+  if (tp && minor) { const pc = form.declaration_parent_consent; if (!pc.checked) bad(pc, 'Please confirm you have taken the parent / guardian consent.'); }
+  // "Other" text boxes
+  form.querySelectorAll('select[data-other]').forEach(sel => {
+    if (!isVisible(sel) || !/^Other/.test(sel.value)) return;
+    const t = form.elements[sel.dataset.other];
+    if (sel.name !== 'source' && !t.value.trim()) bad(t, 'Please specify.');
+  });
+  form.querySelectorAll('input[type=email]').forEach(el => {
+    if (isVisible(el) && el.value && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value.trim())) bad(el, 'Enter a valid email, like name@example.com.');
+  });
+  form.querySelectorAll('[data-phone]').forEach(el => {
+    if (isVisible(el) && el.value && !/^[6-9]\d{9}$/.test(el.value)) bad(el, 'Enter a valid 10-digit mobile number starting with 6, 7, 8 or 9.');
+  });
+  const url = form.nominee_social;
+  if (url.value && !/^https?:\/\/\S+\.\S+/.test(url.value.trim())) bad(url, 'Enter a full link starting with https://');
+
+  const st = ageState();
+  if (st === 'over') bad($('#dob'), 'Nominee must be under 20 on 21 November 2026.');
+  if (st === 'future') bad($('#dob'), 'Please enter a valid date of birth.');
+  if (!form.category.value) { $('#catErr').classList.remove('hidden'); first = first || $('#catGroup'); } else $('#catErr').classList.add('hidden');
+
+  if (first) {
+    showMsg('Please fix the highlighted fields.', false);
+    $('#formMsg').scrollIntoView({ block: 'nearest' });
+    first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (first.focus && first.tagName !== 'DIV') setTimeout(() => first.focus({ preventScroll: true }), 400);
+    return false;
+  }
+  $('#formMsg').classList.add('hidden');
+  return true;
+}
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  if (form.website.value) return;           // honeypot tripped
+  if (!validate()) return;
+  if (SCRIPT_URL.startsWith('PASTE_')) { showMsg('Setup incomplete: add the Apps Script Web App URL in nominate.html.', false); return; }
+
+  const btn = $('#submitBtn');
+  btn.disabled = true; btn.textContent = 'Submitting…';
+  const data = new URLSearchParams(new FormData(form));
+  data.delete('website');
+  ['nominee_phone', 'nominator_phone', 'guardian_phone'].forEach(k => {
+    if (data.get(k)) data.set(k, '+91 ' + data.get(k));
+  });
+  data.set('age_group', ageState() === 'minor' ? 'Under 18' : '18-19');
+  data.set('submitted_from', location.href);
+  const ref = 'S20-RJ-' + Date.now().toString(36).toUpperCase();
+  data.set('reference_id', ref);
+
+  try {
+    await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: data });
+    form.classList.add('hidden');
+    $('#refId').textContent = ref;
+    $('#success').classList.remove('hidden');
+    $('#progress').style.width = '100%';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (err) {
+    showMsg('Could not submit. Please check your internet connection and try again.', false);
+    btn.disabled = false; btn.textContent = 'Submit Nomination';
+  }
+});
+refresh();
+</script>
+</body>
+</html>
