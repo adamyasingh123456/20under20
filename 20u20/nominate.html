@@ -220,6 +220,38 @@ tailwind.config = {
 
 <footer class="bg-brand-deepNavy text-slate-400 text-xs py-8 px-4 text-center">Sunstone 20 Under 20 – Rajasthan Edition 2026 · A platform for exceptional work. A community with infinite potential.</footer>
 
+<script data-purpose="visit-tracking">
+  // Counts page visits in our own Google Sheet. Stores only an anonymous random ID, the page,
+  // the campaign tags in the link (utm_*), the referring site and the device type. No personal data.
+  (function () {
+    var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyU1Eag-meMNmZ1IDI2C56lnGGU5pO-Y_lw2Ca_z-9Pj2SWaZjLIVXdZ7I0u71YKTt6jQ/exec';
+    var UTM = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
+    function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+    function set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+    try {
+      var q = new URLSearchParams(location.search);
+      var attr = null;
+      try { attr = JSON.parse(get('s20_attr') || 'null'); } catch (e) {}
+      var hasUtm = UTM.some(function (k) { return q.get(k); });
+      if (hasUtm || !attr) {                       // first touch wins, unless a new tagged link is opened
+        var ref = '';
+        try { var h = new URL(document.referrer).hostname.replace(/^www\./, ''); if (h && h !== location.hostname) ref = h; } catch (e) {}
+        attr = { referrer: ref };
+        UTM.forEach(function (k) { attr[k] = (q.get(k) || '').toLowerCase().slice(0, 100); });
+        set('s20_attr', JSON.stringify(attr));
+      }
+      var vid = get('s20_vid');
+      if (!vid) { vid = Math.random().toString(36).slice(2) + Date.now().toString(36); set('s20_vid', vid); }
+      var device = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? 'mobile' : 'desktop';
+      window.S20 = { attr: attr, device: device, vid: vid };
+      if (location.hostname === '20under20.sunstone.in') {      // test pages and previews are not counted
+        var body = new URLSearchParams({ type: 'visit', visitor_id: vid, page: location.pathname, device: device, referrer: attr.referrer || '' });
+        UTM.forEach(function (k) { body.set(k, attr[k] || ''); });
+        fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', body: body, keepalive: true }).catch(function () {});
+      }
+    } catch (e) {}
+  })();
+</script>
 <script>
 // ====== CONFIG: Apps Script Web App URL ======
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyU1Eag-meMNmZ1IDI2C56lnGGU5pO-Y_lw2Ca_z-9Pj2SWaZjLIVXdZ7I0u71YKTt6jQ/exec';
@@ -379,6 +411,9 @@ form.addEventListener('submit', async e => {
   });
   data.set('age_group', ageState() === 'minor' ? 'Under 18' : '18-19');
   data.set('submitted_from', location.href);
+  const A = (window.S20 && window.S20.attr) || {};
+  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'referrer'].forEach(k => data.set(k, A[k] || ''));
+  data.set('device', (window.S20 && window.S20.device) || '');
   const ref = 'S20-RJ-' + Date.now().toString(36).toUpperCase();
   data.set('reference_id', ref);
 
