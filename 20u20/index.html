@@ -265,7 +265,9 @@
     /* First screen = top bar + nav + hero + banner, so the banner is always visible */
     [data-purpose="hero-section"] { display:flex; align-items:center; min-height: calc(100svh - 11rem); padding-top:1.5rem !important; padding-bottom:2rem !important; }
     [data-purpose="hero-section"] > div { width:100%; }
-    [data-purpose="hero-section"] h1 { font-size: clamp(2rem, 3.4vw + 0.6rem, 3.6rem) !important; line-height:1.12 !important; }
+    [data-purpose="hero-section"] h1 { font-size: clamp(2.25rem, 3.6vw + 0.6rem, 3.75rem) !important; line-height:1.08 !important; }
+    @media (max-width: 480px) { [data-purpose="hero-section"] h1 { font-size: 1.8rem !important; } }
+    [data-purpose="hero-section"] .hero-tagline { font-size: clamp(1.3rem, 1.6vw + 0.7rem, 2rem) !important; }
     [data-purpose="hero-section"] .max-w-md { padding:1.25rem 1.5rem; }
     [data-purpose="hero-section"] .max-w-\[280px\] { max-width: 230px; }
     @media (max-height: 760px) and (min-width: 1024px) { [data-purpose="hero-section"] .max-w-md > p, [data-purpose="hero-section"] .max-w-md > div:last-child { display:none; } }
@@ -358,18 +360,18 @@
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
 <!-- Left Content -->
 <div class="lg:col-span-7 space-y-6">
-<!-- Program Pill -->
-<p class="text-sm font-semibold text-brand-gold tracking-wide">Rajasthan Edition 2026</p>
-<!-- Headline -->
-<h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-navy tracking-tight leading-[1.15]">
-              You Don’t Have To Wait To Be <br class="hidden sm:inline">
-<span class="text-brand-gold relative inline-block">
-                “The Next Big Thing.”
-</span>
+<!-- Headline: the brand name and the place sit together in one H1 so search engines read "20 Under 20 Rajasthan" as a phrase -->
+<h1 class="font-display font-extrabold text-brand-navy tracking-tight leading-[1.1]">
+<span class="block">Sunstone 20 Under 20</span>
+<span class="block text-brand-gold text-xl sm:text-2xl lg:text-3xl font-bold tracking-wide mt-2">Rajasthan Edition 2026</span>
 </h1>
-<!-- Subtitle -->
-<p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
-              Building a community of exceptional young achievers with infinite potential.</p>
+<h2 class="hero-tagline font-display font-extrabold text-brand-navy tracking-tight leading-snug">
+              You Don’t Have To Wait To Be <br class="hidden sm:inline">
+<span class="text-brand-gold">“The Next Big Thing.”</span>
+</h2>
+<!-- Intro -->
+<p class="text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
+              Sunstone 20 Under 20 is a statewide recognition for 20 exceptional young achievers under 20 in Rajasthan, across entrepreneurship, technology and AI, creativity, emerging talent and social impact. Nominations are free to enter.</p>
 <!-- Primary CTAs -->
 <div class="pt-2 flex flex-col sm:flex-row items-start sm:items-center gap-4">
 <a class="w-full sm:w-auto inline-flex items-center justify-center bg-brand-navy hover:bg-[#1a2e5d] text-white font-bold text-sm sm:text-base px-8 py-3.5 rounded-full transition-all duration-200 shadow-lg hover:shadow-xl group border border-slate-700/50" href="nominate.html#form-top">
