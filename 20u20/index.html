@@ -265,14 +265,24 @@
     /* First screen = top bar + nav + hero + banner, so the banner is always visible */
     [data-purpose="hero-section"] { display:flex; align-items:center; min-height: calc(100svh - 11rem); padding-top:1.5rem !important; padding-bottom:2rem !important; }
     [data-purpose="hero-section"] > div { width:100%; }
-    [data-purpose="hero-section"] h1 { font-size: clamp(2.25rem, 3.6vw + 0.6rem, 3.75rem) !important; line-height:1.08 !important; }
-    @media (max-width: 480px) { [data-purpose="hero-section"] h1 { font-size: 1.8rem !important; } }
-    [data-purpose="hero-section"] .hero-tagline { font-size: clamp(1.3rem, 1.6vw + 0.7rem, 2rem) !important; }
+    /* Hero lockup: mirrors the logo (small brand name, huge "20 Under 20", spaced gold edition line) */
+    .hero-title { margin:0; display:flex; flex-direction:column; color:#152449; }
+    .hero-kicker { font-size:clamp(.8rem,.5vw + .65rem,1rem); font-weight:700; letter-spacing:.34em; text-transform:uppercase; color:#475569; }
+    .hero-big { font-size:clamp(3rem,7.4vw,5.25rem); font-weight:900; letter-spacing:-.045em; line-height:.98; margin-top:.3rem; }
+    .hero-edition { margin-top:.7rem; font-size:clamp(.72rem,.6vw + .55rem,1.05rem); font-weight:600; letter-spacing:.4em; text-transform:uppercase; color:#c88c32; }
+    .hero-tagline { margin:0; font-size:clamp(1.15rem,1vw + .85rem,1.6rem); font-weight:700; line-height:1.3; letter-spacing:-.01em; color:#152449; }
+    .hero-intro { margin:0; max-width:34rem; font-size:1rem; line-height:1.65; color:#475569; }
+    .hero-secondary { display:inline-flex; align-items:center; justify-content:center; padding:.8rem 1.6rem; border:1.5px solid #152449; border-radius:9999px; color:#152449; font-weight:700; font-size:.95rem; text-decoration:none; transition:background-color .2s ease, color .2s ease, border-color .2s ease, transform .2s ease; }
+    .hero-secondary:hover { background:#152449; color:#fff; }
+    @media (max-width:639px) { .hero-secondary { width:100%; } }
+    [data-purpose="hero-section"] .lg\:col-span-7 { display:flex; flex-direction:column; gap:1.1rem; }
+    @media (max-height:820px) and (min-width:768px) { .hero-big { font-size:clamp(3rem,6.2vw,4.4rem); } [data-purpose="hero-section"] .lg\:col-span-7 { gap:.9rem; } .hero-intro { font-size:.92rem; line-height:1.55; } }
+    @media (max-height:720px) and (min-width:768px) { .hero-big { font-size:3.5rem; } .hero-edition { margin-top:.4rem; } [data-purpose="hero-section"] .lg\:col-span-7 { gap:.7rem; } .hero-tagline { font-size:1.1rem; } [data-purpose="hero-section"] .lg\:col-span-7 > .border-t { display:none; } }
     [data-purpose="hero-section"] .max-w-md { padding:1.25rem 1.5rem; }
     [data-purpose="hero-section"] .max-w-\[280px\] { max-width: 230px; }
     @media (max-height: 760px) and (min-width: 1024px) { [data-purpose="hero-section"] .max-w-md > p, [data-purpose="hero-section"] .max-w-md > div:last-child { display:none; } }
-    @media (max-width: 767px) { [data-purpose="hero-section"] { min-height: calc(100svh - 9rem); align-items:center; } }
-    @media (max-width: 767px) { [data-purpose="hero-section"] .lg\:col-span-5 { display:none; } }
+    @media (max-width: 1023px) { [data-purpose="hero-section"] { min-height: calc(100svh - 9rem); align-items:center; } }
+    @media (max-width: 1023px) { [data-purpose="hero-section"] .lg\:col-span-5 { display:none; } }
     a[href^="nominate.html"].bg-brand-navy:focus-visible { background-color:#c88c32 !important; border-color:#c88c32 !important; outline:2px solid #0d1833; outline-offset:2px; }
     .tb-m { display:none; }
     @media (max-width: 639px) { .tb-d { display:none; } .tb-m { display:block; width:100%; text-align:center; font-size:11.5px; } }
@@ -360,24 +370,25 @@
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
 <!-- Left Content -->
 <div class="lg:col-span-7 space-y-6">
-<!-- Headline: the brand name and the place sit together in one H1 so search engines read "20 Under 20 Rajasthan" as a phrase -->
-<h1 class="font-display font-extrabold text-brand-navy tracking-tight leading-[1.1]">
-<span class="block">Sunstone 20 Under 20</span>
-<span class="block text-brand-gold text-xl sm:text-2xl lg:text-3xl font-bold tracking-wide mt-2">Rajasthan Edition 2026</span>
+<!-- Headline: brand, name and place sit together in one H1 so search engines read "20 Under 20 Rajasthan" as a phrase -->
+<h1 class="hero-title">
+<span class="hero-kicker">Sunstone</span>
+<span class="hero-big">20 Under 20</span>
+<span class="hero-edition">Rajasthan Edition 2026</span>
 </h1>
-<h2 class="hero-tagline font-display font-extrabold text-brand-navy tracking-tight leading-snug">
+<h2 class="hero-tagline">
               You Don’t Have To Wait To Be <br class="hidden sm:inline">
 <span class="text-brand-gold">“The Next Big Thing.”</span>
 </h2>
 <!-- Intro -->
-<p class="text-sm sm:text-base text-slate-600 max-w-2xl leading-relaxed">
+<p class="hero-intro">
               Sunstone 20 Under 20 is a statewide recognition for 20 exceptional young achievers under 20 in Rajasthan, across entrepreneurship, technology and AI, creativity, emerging talent and social impact. Nominations are free to enter.</p>
 <!-- Primary CTAs -->
 <div class="pt-2 flex flex-col sm:flex-row items-start sm:items-center gap-4">
 <a class="w-full sm:w-auto inline-flex items-center justify-center bg-brand-navy hover:bg-[#1a2e5d] text-white font-bold text-sm sm:text-base px-8 py-3.5 rounded-full transition-all duration-200 shadow-lg hover:shadow-xl group border border-slate-700/50" href="nominate.html#form-top">
 <span class="">Submit Nomination</span>
 </a>
-
+<a class="hero-secondary" href="#categories">View categories</a>
 </div>
 <!-- Meta details -->
 <div class="flex flex-wrap items-center gap-4 sm:gap-6 text-xs text-slate-500 pt-3 border-t border-slate-200">
